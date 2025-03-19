@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -25,6 +26,7 @@ import java.util.Locale;
 public class CrimeListFragment extends Fragment {
 
     private RecyclerView mCrimeRecyclerView;
+    private CrimeAdapter mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,16 +38,22 @@ public class CrimeListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     private void updateUI() {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
-        if (mCrimeRecyclerView.getAdapter() == null) {
+        if (mAdapter == null) {
             CrimeAdapter adapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(adapter);
         } else {
-            mCrimeRecyclerView.getAdapter().notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();
         }
     }
 
@@ -88,7 +96,9 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
+            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getID());
+            startActivity(intent);
+
         }
     }
 
@@ -135,7 +145,8 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
+            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getID());
+            startActivity(intent);
         }
     }
 
