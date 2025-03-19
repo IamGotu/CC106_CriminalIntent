@@ -2,6 +2,7 @@ package com.bignerdranch.android.criminalintent;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CrimeListFragment extends Fragment {
 
@@ -61,6 +65,11 @@ public class CrimeListFragment extends Fragment {
             mSolvedImageView = itemView.findViewById(R.id.crime_solved);
         }
 
+        private String getLocalizedFormattedDate(Date date) {
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.getDefault());
+            return sdf.format(date);
+        }
+
         public void bind(Crime crime) {
             mCrime = crime;
             mTitleTextView.setText(crime.getTitle());
@@ -103,6 +112,11 @@ public class CrimeListFragment extends Fragment {
             mContactPoliceButton.setOnClickListener(v ->
                     Toast.makeText(getActivity(), "Calling police for " + mCrime.getTitle(), Toast.LENGTH_SHORT).show()
             );
+        }
+
+        private String getLocalizedFormattedDate(Date date) {
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.getDefault());
+            return sdf.format(date);
         }
 
         public void bind(Crime crime) {
