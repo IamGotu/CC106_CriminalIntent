@@ -34,10 +34,24 @@ public class CrimeListFragment extends Fragment {
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
+
         private List<Crime> mCrimes;
+
         public CrimeAdapter(List<Crime> crimes) {
             mCrimes = crimes;
         }
-    }
 
+        @Override
+        public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            return new CrimeHolder(layoutInflater, parent);
+        }
+        @Override
+        public void onBindViewHolder(CrimeHolder holder, int position) {
+        }
+        @Override
+        public int getItemCount() {
+            return mCrimes.size();
+        }
+    }
 }
