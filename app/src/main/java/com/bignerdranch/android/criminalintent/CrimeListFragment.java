@@ -1,19 +1,27 @@
 package com.bignerdranch.android.criminalintent;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CrimeListFragment extends Fragment {
 
-    public class ListRow extends RecyclerView.ViewHolder {
-        public ImageView mThumbnail;
-        public ListRow(View view) {
-            super(view);
-            mThumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-        }
-    }
+    private RecyclerView mCrimeRecyclerView;
 
+    @SuppressLint("MissingInflatedId")
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
+        mCrimeRecyclerView = (RecyclerView) view
+                .findViewById(R.id.crime_recycler_view);
+        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        return view;
+    }
 }
