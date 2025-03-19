@@ -2,10 +2,12 @@ package com.bignerdranch.android.criminalintent;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ public class CrimeListFragment extends Fragment {
 
         private final TextView mTitleTextView;
         private final TextView mDateTextView;
+        private final ImageView mSolvedImageView;
         private Crime mCrime;
 
         public CrimeHolder(View itemView) {
@@ -55,12 +58,23 @@ public class CrimeListFragment extends Fragment {
 
             mTitleTextView = itemView.findViewById(R.id.crime_title);
             mDateTextView = itemView.findViewById(R.id.crime_date);
+            mSolvedImageView = itemView.findViewById(R.id.crime_solved);
         }
 
         public void bind(Crime crime) {
             mCrime = crime;
             mTitleTextView.setText(crime.getTitle());
             mDateTextView.setText(crime.getDate().toString());
+
+            // Fix the visibility issue by resetting the visibility
+            if (crime.isSolved()) {
+                mSolvedImageView.setVisibility(View.VISIBLE);
+            } else {
+                mSolvedImageView.setVisibility(View.GONE);
+            }
+
+            // Debugging Log
+            Log.d("CrimeListFragment", "Binding: " + crime.getTitle() + " Solved: " + crime.isSolved());
         }
 
         @Override
@@ -74,6 +88,7 @@ public class CrimeListFragment extends Fragment {
         private final TextView mTitleTextView;
         private final TextView mDateTextView;
         private final Button mContactPoliceButton;
+        private final ImageView mSolvedImageView;
         private Crime mCrime;
 
         public SeriousCrimeHolder(View itemView) {
@@ -82,6 +97,7 @@ public class CrimeListFragment extends Fragment {
 
             mTitleTextView = itemView.findViewById(R.id.crime_title);
             mDateTextView = itemView.findViewById(R.id.crime_date);
+            mSolvedImageView = itemView.findViewById(R.id.crime_solved);
             mContactPoliceButton = itemView.findViewById(R.id.contact_police_button);
 
             mContactPoliceButton.setOnClickListener(v ->
@@ -93,6 +109,14 @@ public class CrimeListFragment extends Fragment {
             mCrime = crime;
             mTitleTextView.setText(crime.getTitle());
             mDateTextView.setText(crime.getDate().toString());
+            if (crime.isSolved()) {
+                mSolvedImageView.setVisibility(View.VISIBLE);
+            } else {
+                mSolvedImageView.setVisibility(View.GONE);
+            }
+
+            // Debugging Log
+            Log.d("CrimeListFragment", "Binding: " + crime.getTitle() + " Solved: " + crime.isSolved());
         }
 
         @Override
