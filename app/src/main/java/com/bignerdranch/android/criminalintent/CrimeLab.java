@@ -23,7 +23,8 @@ public class CrimeLab {
         for (int i = 0; i < 100; i++) {
             Crime crime = new Crime();
             crime.setTitle("Crime #" + i);
-            crime.setSolved(i % 2 == 0); // Every other one
+            crime.setSolved(i % 2 == 0); // Every alternate crime is solved
+            crime.setRequiresPolice(i % 5 == 0); // Every 5th crime is a "serious" crime
             mCrimes.add(crime);
         }
     }
