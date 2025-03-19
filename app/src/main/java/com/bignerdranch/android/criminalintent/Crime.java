@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Crime {
 
-    private UUID mId;
+    private final UUID mId;
     private String mTitle;
     private Date mDate;
     private boolean mSolved;
@@ -42,5 +42,4 @@ public class Crime {
     public void setSolved(boolean solved) {
         mSolved = solved;
     }
-
 }

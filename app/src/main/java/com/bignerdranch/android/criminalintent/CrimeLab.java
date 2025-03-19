@@ -9,7 +9,7 @@ import java.util.UUID;
 public class CrimeLab {
 
     private static CrimeLab sCrimeLab;
-    private List<Crime> mCrimes;
+    private final List<Crime> mCrimes;
 
     public static CrimeLab get(Context context) {
         if (sCrimeLab == null) {
@@ -20,7 +20,7 @@ public class CrimeLab {
 
     private CrimeLab(Context context) {
         mCrimes = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 20; i++) {
             Crime crime = new Crime();
             crime.setTitle("Crime #" + i);
             crime.setSolved(i % 2 == 0); // Every other one
@@ -34,7 +34,7 @@ public class CrimeLab {
 
     public Crime getCrime(UUID id) {
         for (Crime crime : mCrimes) {
-            if (crime.getId().equals(id)) {
+            if (crime.getID().equals(id)) {
                 return crime;
             }
         }
